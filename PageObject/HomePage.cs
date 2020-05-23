@@ -9,8 +9,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.ObjectModel;
 using EC = SeleniumExtras.WaitHelpers.ExpectedConditions;
-
-
+using System.Security.Cryptography.X509Certificates;
 
 namespace Cas60.PageObject
 {
@@ -47,6 +46,26 @@ namespace Cas60.PageObject
             }
 
         }
+        public IWebElement Create
+        {
+            get
+            {
+                IWebElement element;
+                try
+                {
+                    element = wait.Until(EC.ElementIsVisible(By.XPath("//a[text()='Kreiraj novog korisnika']")));
+                }
+                catch (Exception)
+                { element = null; }
+                return element;
+            }
+        }
+        public NewUser CreateUser()
+        {
+            this.Create?.Click();
+            wait.Until(EC.ElementIsVisible(By.XPath("//a[text()='QA.rs']")));
+            return new NewUser(this.driver);
+        }
         public Table ListOfRegistration()
         {
            
@@ -57,6 +76,6 @@ namespace Cas60.PageObject
            
 
         }
-
+        
     }
 }

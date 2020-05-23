@@ -41,12 +41,39 @@ namespace Cas60.PageObject
             }
          
         }
+        public ReadOnlyCollection<IWebElement> ListEmails
+        {
+            get
+            {
+                ReadOnlyCollection<IWebElement> LE;
+                try
+                {
+                    LE = this.driver.FindElements(By.XPath("//td[contains(text(),'@')]"));
+
+                }
+                catch (Exception)
+                {
+                    LE = null;
+                }
+                return LE;
+            }
+
+        }
         public UInt64 Countz()
         {
             UInt64 S=0;
             foreach(IWebElement L in this.ListGender)
             {
-                if (L.Text == "Z") { S = S + 1; }
+                if (L?.Text == "Z") { S = S + 1; }
+            }
+            return S;
+        }
+        public bool Verify(string email)
+        {
+            bool S = false;
+            foreach (IWebElement L in this.ListEmails)
+            {
+                if (L?.Text == email) { S = true; }
             }
             return S;
         }

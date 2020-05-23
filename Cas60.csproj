@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageObject\HomePage.cs" />
+    <Compile Include="PageObject\NewUser.cs" />
     <Compile Include="PageObject\Table.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
